@@ -39,8 +39,10 @@ Default output format [None]: json
     const APP_IMAGE_NAME = "amazon/amazon-ecs-sample";
     // Configuration (end)
 ```
-3. Execute `cdk synth` to verify & emits the synthesized CloudFormation template
-4. Execute `cdk deploy` to spin up the environment, it'll take about 5-10 mins
+3. Execute `npm i -D @types/node typescript ts-node` to download the dependancy.   
+   It is required to be done once and takes about 5 mins.
+4. Execute `cdk synth` to verify & emits the synthesized CloudFormation template
+5. Execute `cdk deploy` to spin up the environment, it'll take about 5-10 mins
 
 ## After the Demo
 Execute `cdk destroy` to remove the demo environment on AWS.   It'll take about 15 mins
