@@ -24,8 +24,7 @@ export class CemAwsDemo01Stack extends cdk.Stack {
 
     const APP_VPC = "MyVPC";
     const APP_CLUSTER = "MyCluster";
-    const APP_FARGATE_SERVICE_WITH_ADMIN_ROLE = "MyFargateServiceAsAdmin";
-    const APP_FARGATE_SERVICE_WITH_SHADOW_ROLE = "MyFargateServiceAsShadow";
+    const APP_FARGATE_SERVICE = "MyFargateService";
     const APP_IMAGE_NAME = "amazon/amazon-ecs-sample";
     // Configuration (end)
 
@@ -87,7 +86,7 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     });
 
     // Create a load-balanced Fargate service with ADMIN privileges and make it public
-    new ecs_patterns.ApplicationLoadBalancedFargateService(this, APP_FARGATE_SERVICE_WITH_ADMIN_ROLE, {
+    new ecs_patterns.ApplicationLoadBalancedFargateService(this, APP_FARGATE_SERVICE, {
       cluster: cluster, // Required
       cpu: 256, // Default is 256
       desiredCount: 2, // Default is 1
