@@ -4,7 +4,7 @@ This project makes use of AWS CDK to spin up an AWS environment with Admin & Sha
 
 ## Prerequisite
 1. Install [AWS CLI Client](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-2. Install [AWS AWS Cloud Development Kit](https://aws.amazon.com/cdk/)
+2. Install [AWS Cloud Development Kit](https://aws.amazon.com/cdk/)
 3. Create a pair of access-key & secret key if you don't have one
 4. Setup AWS CLI by execute `aws configure` and pick a region for your demo
 ```
