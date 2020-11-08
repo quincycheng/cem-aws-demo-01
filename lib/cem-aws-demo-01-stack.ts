@@ -22,7 +22,9 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     const DEMO_USER_YOURSELF = "YOURSELF";  //Change it to your own name
     const DEMO_GROUP_DEVELOPERS = "Developers";
     const DEMO_GROUP_ADMINS = "Admins";
-    const DEMO_IAM_ROLE = "AWS_ServiceRole_ECSFullAccess";
+    const DEMO_IAM_ROLE = "AWS-ServiceRole-ECSFullAccess";
+    const DEMO_IDP_ROLE = "AWS-IDP-AdminAccess-Role";
+
     
 
     // Custom Roles, Users & Groups
@@ -86,13 +88,20 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     // Assign the AdministratorAccess policy to the Admins Group
     admins.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AdministratorAccess"));
 
-    // Create Roles
-    const demoIamRole = new iam.Role(this, DEMO_IAM_ROLE, {
+    // Create IAM role
+    const iamRole = new iam.Role(this, DEMO_IAM_ROLE, {
       assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com'),
       description: "Allows EC2 instances to call AWS services on your behalf."
     });
-    demoIamRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEC2FullAccess"));
+    iamRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEC2FullAccess"));
     
+
+    // Create IDP Role
+    /*
+    const idpRole = new iam.Role(this, DEMO_IDP_ROLE, {
+      assumedBy: new iam.FederatedPrincipal()
+    });
+*/
 
     /**
     * Custom Roles, Users and Groups
