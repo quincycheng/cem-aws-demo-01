@@ -20,9 +20,9 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     const DEMO_USER_MIKE = "Mike";
     const DEMO_USER_JOHN = "John";
     const DEMO_USER_YOURSELF = "YOURSELF";  //Change it to your own name
-
     const DEMO_GROUP_DEVELOPERS = "Developers";
     const DEMO_GROUP_ADMINS = "Admins";
+    const DEMO_IAM_ROLE = "AWS_ServiceRole_ECSFullAccess";
     
 
     // Custom Roles, Users & Groups
@@ -86,6 +86,13 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     // Assign the AdministratorAccess policy to the Admins Group
     admins.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AdministratorAccess"));
 
+    // Create Roles
+    const demoIamRole = new iam.Role(this, DEMO_IAM_ROLE, {
+      assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com'),
+      description: "Allows EC2 instances to call AWS services on your behalf."
+    });
+    demoIamRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEC2FullAccess"));
+    
 
     /**
     * Custom Roles, Users and Groups
