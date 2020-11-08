@@ -43,7 +43,7 @@ Default output format [None]: json
 3. Review `lib\cem-aws-demo-01-stack.ts`, review & update the configuration section
    The varaibles should be self-explanatory.
 ```
-        /**
+   /**
      * Configuration
      */ 
 

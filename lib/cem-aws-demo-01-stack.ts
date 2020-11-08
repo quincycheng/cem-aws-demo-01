@@ -12,7 +12,7 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     super(scope, id, props);
 
     /**
-     * Configuration (start)
+     * Configuration
      */ 
 
     // Standard Demo Setup
@@ -24,8 +24,6 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     const DEMO_GROUP_ADMINS = "Admins";
     const DEMO_IAM_ROLE = "AWS-ServiceRole-ECSFullAccess";
     const DEMO_IDP_ROLE = "AWS-IDP-AdminAccess-Role";
-
-    
 
     // Custom Roles, Users & Groups
     const ADMIN_ROLE_NAME = "MyAdminRole";
@@ -44,7 +42,6 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     const APP_CLUSTER = "MyCluster";
     const APP_FARGATE_SERVICE = "MyFargateService";
     const APP_IMAGE_NAME = "amazon/amazon-ecs-sample";
-    // Configuration (end)
 
     /**
      * Standard Demo
