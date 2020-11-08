@@ -70,13 +70,21 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     yourself.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonRDSFullAccess"));
     yourself.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess"));
     
-    // The developer group will have access to S3, RDS, EC2 plus IAM 
-
+    // Create Groups 
     const developers = new iam.Group(this, DEMO_GROUP_DEVELOPERS);
     const admins = new iam.Group(this, DEMO_GROUP_ADMINS);
 
+    // The developer group will have access to S3, RDS, EC2 plus IAM 
+    developers.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonS3FullAccess"));
+    developers.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("IAMFullAccess"));
+    developers.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonRDSFullAccess"));
+    developers.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEC2FullAccess"));
 
-    
+    // Add Robert to Developer group
+    developers.addUser(robert);
+
+    // Assign the AdministratorAccess policy to the Admins Group
+    admins.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AdministratorAccess"));
 
 
     /**
