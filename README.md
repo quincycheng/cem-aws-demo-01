@@ -1,6 +1,6 @@
 # CEM AWS Demo 01
 
-This project makes use of AWS CDK to spin up an AWS environment with Admin & Shadwow Admin users, groups & roles, together with a Fargate app service 
+This project makes use of AWS CDK to spin up an AWS environment with standard demo, and custom resources like Admin & Shadwow Admin users, groups & roles, together with a Fargate app service 
 
 ## What resources will be created?
 - Standard Demo
