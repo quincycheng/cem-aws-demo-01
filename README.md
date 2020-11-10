@@ -43,9 +43,11 @@ Default output format [None]: json
 3. Review `lib\cem-aws-demo-01-stack.ts`, review & update the configuration section
    The varaibles should be self-explanatory.
 ```
-   /**
+    /**
      * Configuration
      */ 
+    // General Settings
+    const STACK_NAME = "AP-"; // Consider the stack name is the prefix of the resource names
 
     // Standard Demo Setup
     const DEMO_USER_ROBERT = "Robert";

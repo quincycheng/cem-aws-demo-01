@@ -6,42 +6,55 @@ import * as ec2 from "@aws-cdk/aws-ec2";
 import * as ecs from "@aws-cdk/aws-ecs";
 import * as ecs_patterns from "@aws-cdk/aws-ecs-patterns";
 import * as iam from "@aws-cdk/aws-iam";
+import * as s3 from "@aws-cdk/aws-s3";
+
 
 export class CemAwsDemo01Stack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
 
     /**
      * Configuration
      */ 
+    // General Settings
+    const STACK_NAME = "AP-"; // Consider the stack name is the prefix of the resource names
 
     // Standard Demo Setup
-    const DEMO_USER_ROBERT = "Robert";
-    const DEMO_USER_MIKE = "Mike";
-    const DEMO_USER_JOHN = "John";
-    const DEMO_USER_YOURSELF = "YOURSELF";  //Change it to your own name
-    const DEMO_GROUP_DEVELOPERS = "Developers";
-    const DEMO_GROUP_ADMINS = "Admins";
-    const DEMO_IAM_ROLE = "AWS-ServiceRole-ECSFullAccess";
-    const DEMO_IDP_ROLE = "AWS-IDP-AdminAccess-Role";
+    const DEMO_USER_ROBERT = "Robert--";
+    const DEMO_USER_MIKE = "Mike_";
+    const DEMO_USER_JOHN = "John_";
+    const DEMO_USER_YOURSELF = "YOURSELF_";  //Change it to your own name
+    const DEMO_GROUP_DEVELOPERS = "Developers_";
+    const DEMO_GROUP_ADMINS = "Admins_";
+    const DEMO_IAM_ROLE = "AWS-ServiceRole-ECSFullAccess-";
+    const DEMO_S3_BUCKET = "MyS3Bucket-";
+    const DEMO_IDP_ROLE = "AWS-IDP-AdminAccess-Role-";
+    const DEMO_S3_POLICY = "S3_BucketAccess_Policy-";
 
     // Custom Roles, Users & Groups
-    const ADMIN_ROLE_NAME = "MyAdminRole";
-    const ADMIN_USER_NAME = "MyAdminUser";
-    const ADMIN_GROUP_NAME = "MyAdminGroup";
-    const ADMIN_POLICY_NAME = "MyAdminPolicy";
+    const ADMIN_ROLE_NAME = "MyAdminRole-";
+    const ADMIN_USER_NAME = "MyAdminUser-";
+    const ADMIN_GROUP_NAME = "MyAdminGroup-";
+    const ADMIN_POLICY_NAME = "MyAdminPolicy-";
 
-    const SHADOW_ROLE_NAME = "MyShadowRole";
-    const SHADOW_USER_NAME = "MyShadowUser";
-    const SHADOW_GROUP_NAME = "MyShadowGroup";
-    const SHADOW_POLICY_NAME = "MyShadowPolicy";
+    const SHADOW_ROLE_NAME = "MyShadowRole-";
+    const SHADOW_USER_NAME = "MyShadowUser-";
+    const SHADOW_GROUP_NAME = "MyShadowGroup-";
+    const SHADOW_POLICY_NAME = "MyShadowPolicy-";
 
     // Demo Fargate App
     const IS_DEPLOY_FARGATE_APP = false; //Set to true to deploy demo Fargate app; default to false to save spin-up time & resources
-    const APP_VPC = "MyVPC";
-    const APP_CLUSTER = "MyCluster";
-    const APP_FARGATE_SERVICE = "MyFargateService";
+    const APP_VPC = "MyVPC-";
+    const APP_CLUSTER = "MyCluster-";
+    const APP_FARGATE_SERVICE = "MyFargateService-";
     const APP_IMAGE_NAME = "amazon/amazon-ecs-sample";
+
+    // end of configuration
+
+    
+    /**
+     * Start of Logic, please don't edit the lines below
+     */
+    super(scope, STACK_NAME, props);
 
     /**
      * Standard Demo
@@ -92,13 +105,110 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     });
     iamRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonEC2FullAccess"));
     
-
-    // Create IDP Role
+    // Create S3 Bucket
+    const s3Bucket = new s3.Bucket(this, DEMO_S3_BUCKET);
+    
+    // Create Policy for S3 Bucket
+    const s3PolicyStatement = new iam.PolicyStatement({
+      resources: [s3Bucket.arnForObjects('*')],
+      actions: [                
+        "s3:PutAnalyticsConfiguration",
+        "s3:GetObjectVersionTagging",
+        "s3:DeleteAccessPoint",
+        "s3:CreateBucket",
+        "s3:ReplicateObject",
+        "s3:GetObjectAcl",
+        "s3:GetBucketObjectLockConfiguration",
+        "s3:DeleteBucketWebsite",
+        "s3:PutLifecycleConfiguration",
+        "s3:GetObjectVersionAcl",
+        "s3:DeleteObject",
+        "s3:GetBucketPolicyStatus",
+        "s3:GetObjectRetention",
+        "s3:GetBucketWebsite",
+        "s3:GetJobTagging",
+        "s3:PutReplicationConfiguration",
+        "s3:PutObjectLegalHold",
+        "s3:GetObjectLegalHold",
+        "s3:GetBucketNotification",
+        "s3:PutBucketCORS",
+        "s3:GetReplicationConfiguration",
+        "s3:ListMultipartUploadParts",
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:PutBucketNotification",
+        "s3:DescribeJob",
+        "s3:PutBucketLogging",
+        "s3:GetAnalyticsConfiguration",
+        "s3:PutBucketObjectLockConfiguration",
+        "s3:GetObjectVersionForReplication",
+        "s3:CreateAccessPoint",
+        "s3:GetLifecycleConfiguration",
+        "s3:GetInventoryConfiguration",
+        "s3:GetBucketTagging",
+        "s3:PutAccelerateConfiguration",
+        "s3:DeleteObjectVersion",
+        "s3:GetBucketLogging",
+        "s3:ListBucketVersions",
+        "s3:RestoreObject",
+        "s3:ListBucket",
+        "s3:GetAccelerateConfiguration",
+        "s3:GetBucketPolicy",
+        "s3:PutEncryptionConfiguration",
+        "s3:GetEncryptionConfiguration",
+        "s3:GetObjectVersionTorrent",
+        "s3:AbortMultipartUpload",
+        "s3:GetBucketRequestPayment",
+        "s3:DeleteBucketOwnershipControls",
+        "s3:GetAccessPointPolicyStatus",
+        "s3:UpdateJobPriority",
+        "s3:GetObjectTagging",
+        "s3:GetMetricsConfiguration",
+        "s3:GetBucketOwnershipControls",
+        "s3:DeleteBucket",
+        "s3:PutBucketVersioning",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:ListBucketMultipartUploads",
+        "s3:PutMetricsConfiguration",
+        "s3:PutBucketOwnershipControls",
+        "s3:UpdateJobStatus",
+        "s3:GetBucketVersioning",
+        "s3:GetBucketAcl",
+        "s3:PutInventoryConfiguration",
+        "s3:GetObjectTorrent",
+        "s3:PutBucketWebsite",
+        "s3:PutBucketRequestPayment",
+        "s3:PutObjectRetention",
+        "s3:GetBucketCORS",
+        "s3:GetBucketLocation",
+        "s3:GetAccessPointPolicy",
+        "s3:ReplicateDelete",
+        "s3:GetObjectVersion"
+      ],
+    })
     /*
-    const idpRole = new iam.Role(this, DEMO_IDP_ROLE, {
-      assumedBy: new iam.FederatedPrincipal()
+    const s3Policy = new iam.Policy(this, DEMO_S3_POLICY, {
+      statements: [ s3PolicyStatement ]
     });
+
+    // Create the trust policy
+    const trustStatement = new iam.PolicyStatement({
+      actions: ["sts:AssumeRole"]
+    });
+    trustStatement.addServicePrincipal("s3.amazonaws.com");
+
+
+    const trustPolicy = new iam.Policy(this, "TrustPolicy");
+    trustPolicy.addStatements(trustStatement);
+
+    const idpRole = new iam.Role(this, DEMO_IDP_ROLE, {
+      assumedBy: new iam.ServicePrincipal("sns.amazonaws.com")
+    });
+
+    s3Policy.attachToRole(idpRole);
+    trustPolicy.attachToRole(idpRole);
 */
+
 
     /**
     * Custom Roles, Users and Groups
@@ -112,6 +222,7 @@ export class CemAwsDemo01Stack extends cdk.Stack {
       resources: ['*'],
       actions: ['*'],
     })
+    
     adminRole.addToPolicy(adminPolicyStatement);
 
     const adminUser = new iam.User(this, ADMIN_USER_NAME);
