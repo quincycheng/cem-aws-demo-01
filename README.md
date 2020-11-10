@@ -79,7 +79,7 @@ Default output format [None]: json
 
 ```
 4. Execute `cdk synth` to verify & emits the synthesized CloudFormation template
-5. Execute `cdk deploy` to spin up the environment, it'll take about 5-10 mins
+5. Execute `cdk deploy` to spin up the environment, it'll take about 3-10 mins, depends on the selected configuration
 
-## After the Demo
-Execute `cdk destroy` to remove the demo environment on AWS.   It'll take about 15 mins
+## Clean up
+Execute `cdk destroy` to remove the demo environment on AWS.   
