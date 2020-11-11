@@ -186,11 +186,11 @@ export class CemAwsDemo01Stack extends cdk.Stack {
         "s3:GetObjectVersion"
       ],
     })
-    /*
+    
     const s3Policy = new iam.Policy(this, DEMO_S3_POLICY, {
       statements: [ s3PolicyStatement ]
     });
-
+/*
     // Create the trust policy
     const trustStatement = new iam.PolicyStatement({
       actions: ["sts:AssumeRole"]
