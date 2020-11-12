@@ -19,33 +19,33 @@ export class CemAwsDemo01Stack extends cdk.Stack {
     const STACK_NAME = "AP-"; // Consider the stack name is the prefix of the resource names
 
     // Standard Demo Setup
-    const DEMO_USER_ROBERT = "Robert--";
-    const DEMO_USER_MIKE = "Mike_";
-    const DEMO_USER_JOHN = "John_";
-    const DEMO_USER_YOURSELF = "YOURSELF_";  //Change it to your own name
-    const DEMO_GROUP_DEVELOPERS = "Developers_";
-    const DEMO_GROUP_ADMINS = "Admins_";
-    const DEMO_IAM_ROLE = "AWS-ServiceRole-ECSFullAccess-";
-    const DEMO_S3_BUCKET = "MyS3Bucket-";
-    const DEMO_IDP_ROLE = "AWS-IDP-AdminAccess-Role-";
-    const DEMO_S3_POLICY = "S3_BucketAccess_Policy-";
+    const DEMO_USER_ROBERT = "Robert";
+    const DEMO_USER_MIKE = "Mike";
+    const DEMO_USER_JOHN = "John";
+    const DEMO_USER_YOURSELF = "YOURSELF";  //Change it to your own name
+    const DEMO_GROUP_DEVELOPERS = "Developers";
+    const DEMO_GROUP_ADMINS = "Admins";
+    const DEMO_IAM_ROLE = "AWS-ServiceRole-ECSFullAccess";
+    const DEMO_S3_BUCKET = "MyS3Bucket";
+    const DEMO_IDP_ROLE = "AWS-IDP-AdminAccess-Role";
+    const DEMO_S3_POLICY = "S3-BucketAccess-Policy";
 
     // Custom Roles, Users & Groups
-    const ADMIN_ROLE_NAME = "MyAdminRole-";
-    const ADMIN_USER_NAME = "MyAdminUser-";
-    const ADMIN_GROUP_NAME = "MyAdminGroup-";
-    const ADMIN_POLICY_NAME = "MyAdminPolicy-";
+    const ADMIN_ROLE_NAME = "MyAdminRole";
+    const ADMIN_USER_NAME = "MyAdminUser";
+    const ADMIN_GROUP_NAME = "MyAdminGroup";
+    const ADMIN_POLICY_NAME = "MyAdminPolicy";
 
-    const SHADOW_ROLE_NAME = "MyShadowRole-";
-    const SHADOW_USER_NAME = "MyShadowUser-";
-    const SHADOW_GROUP_NAME = "MyShadowGroup-";
-    const SHADOW_POLICY_NAME = "MyShadowPolicy-";
+    const SHADOW_ROLE_NAME = "MyShadowRole";
+    const SHADOW_USER_NAME = "MyShadowUser";
+    const SHADOW_GROUP_NAME = "MyShadowGroup";
+    const SHADOW_POLICY_NAME = "MyShadowPolicy";
 
     // Demo Fargate App
     const IS_DEPLOY_FARGATE_APP = false; //Set to true to deploy demo Fargate app; default to false to save spin-up time & resources
-    const APP_VPC = "MyVPC-";
-    const APP_CLUSTER = "MyCluster-";
-    const APP_FARGATE_SERVICE = "MyFargateService-";
+    const APP_VPC = "MyVPC";
+    const APP_CLUSTER = "MyCluster";
+    const APP_FARGATE_SERVICE = "MyFargateService";
     const APP_IMAGE_NAME = "amazon/amazon-ecs-sample";
 
     // end of configuration
@@ -171,7 +171,7 @@ export class CemAwsDemo01Stack extends cdk.Stack {
         "s3:ListBucketMultipartUploads",
         "s3:PutMetricsConfiguration",
         "s3:PutBucketOwnershipControls",
-        "s3:UpdateJobStatus",
+        "s3:UpdateJobStatus",   
         "s3:GetBucketVersioning",
         "s3:GetBucketAcl",
         "s3:PutInventoryConfiguration",
